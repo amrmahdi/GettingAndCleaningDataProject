@@ -24,9 +24,8 @@ From the data set in step 4, creates a second, independent tidy data set with th
 This script requires the **dplyr** R library 
 
 ## How to use
-1. Download the data from https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
-2. Unzip the file
-3. source("https://github.com/amrmahdi/GettingAndCleaningDataProject/blob/master/run_analysis.R")
-4. Set the woking directory under the unzipped data folder under getdata-projectfiles-UCI HAR Dataset/UCI HAR Dataset
+1. Download the data from https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip to your R working directory
+2. Unzip the file to your R working directory
+3. source("https://github.com/amrmahdi/GettingAndCleaningDataProject/blob/master/run_analysis.R") from your R working directory
 5. Run **run_analysis.R**
-6. The result will be written to a txt file named **tidyData.txt** to the same working directory set in **4**
+6. The result will be written to a txt file named **tidyData.txt** to your R working directory
