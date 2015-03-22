@@ -63,9 +63,8 @@ For more information about this dataset contact: activityrecognition@smartlab.ws
 - Any variable that begins with Time referes to a time domain variable.
 - Any varuable that beging with Frequency referes to a frequency domain variable.
 - X/Y/Z referes to the dimension of the variable
-- Subject refers to the subject person performed the observation (1 to 30)
+- Subject refers to the subject person performed the observation (1 to 30).
 - Activity is the activity type performed by the subject in the observation (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING).
-- 
 
 ## License:
 
