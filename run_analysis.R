@@ -10,10 +10,10 @@
 # and labels the headers for the features using the headers from features.txt file 
 # It then add to each observation the subject that performed this observation and the
 # type of activity the subject performed during this observation
-ExtractDataSet <- function(featuresPath, labelsPath, subjectsPath, rowsCount) {
+ExtractDataSet <- function(featuresPath, labelsPath, subjectsPath) {
   labels <- tbl_df(read.table(labelsPath))
-  features <- tbl_df(read.table(featuresPath, col.names=header, nrows=rowsCount))
-  subjects <- tbl_df(read.table(subjectsPath, nrows=rowsCount, col.names=c("Subject")))
+  features <- tbl_df(read.table(featuresPath, col.names=header))
+  subjects <- tbl_df(read.table(subjectsPath, col.names=c("Subject")))
   
   activities <- mutate(labels, V1 = activitiesHeaders[V1])
   colnames(activities) = c("Activity")
@@ -21,22 +21,22 @@ ExtractDataSet <- function(featuresPath, labelsPath, subjectsPath, rowsCount) {
   
   features <- select(features, matches("\\W+(mean|std)\\W+", ignore.case = TRUE))
   
-  dataset = tbl_df(cbind(features, cbind(subjects, activities)))
+  dataset = tbl_df(cbind(cbind(subjects, activities), features))
   
   dataset
 }
 
 # read the column headers from features.txt
-header <- as.vector(read.table("features.txt", sep=" ")[[2]])
+header <- as.vector(read.table("getdata-projectfiles-UCI HAR Dataset/UCI HAR Dataset/features.txt", sep=" ")[[2]])
 
 # read the activity labels from activity_labels.txt
-activitiesHeaders <- as.vector(read.table("activity_labels.txt", sep=" "))[[2]]
+activitiesHeaders <- as.vector(read.table("getdata-projectfiles-UCI HAR Dataset/UCI HAR Dataset/activity_labels.txt", sep=" "))[[2]]
 
 # exctracts the test data from test folder
-test <- ExtractDataSet("test/x_test.txt", "test/y_test.txt", "test/subject_test.txt", 2947)
+test <- ExtractDataSet("getdata-projectfiles-UCI HAR Dataset/UCI HAR Dataset/test/x_test.txt", "getdata-projectfiles-UCI HAR Dataset/UCI HAR Dataset/test/y_test.txt", "getdata-projectfiles-UCI HAR Dataset/UCI HAR Dataset/test/subject_test.txt")
 
 # extracts train data from train folder
-train <- ExtractDataSet("train/x_train.txt", "train/y_train.txt", "train/subject_train.txt", 7352)
+train <- ExtractDataSet("getdata-projectfiles-UCI HAR Dataset/UCI HAR Dataset/train/x_train.txt", "getdata-projectfiles-UCI HAR Dataset/UCI HAR Dataset/train/y_train.txt", "getdata-projectfiles-UCI HAR Dataset/UCI HAR Dataset/train/subject_train.txt")
 
 # merges train and test datasets into 1 dataset
 merged <- tbl_df(rbind(test,train))
@@ -76,4 +76,3 @@ grouped <- merged  %>%
 
 # write the grouped data in a txt file
 write.table(merged, row.name=FALSE, file="tidyData.txt", quote = FALSE) 
-
